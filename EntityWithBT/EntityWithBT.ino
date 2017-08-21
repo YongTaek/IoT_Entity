@@ -28,18 +28,20 @@ void loop()
   if(button1State == LOW){         
     bluetooth.print(request);
     bluetooth.print("\n");
+    handle();
   }
-  handle();
 }
 
 void handle(){
-  char response[128]={0};
+  char response[128]={'\0'};
   int i = 0;
   while(!bluetooth.available());
   while(bluetooth.available()){
+    delay(10);
     response[i] = bluetooth.read();
     i++;
   }
+  Serial.println(response);
   String result(response);
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(result);
