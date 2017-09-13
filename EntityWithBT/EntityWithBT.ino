@@ -36,7 +36,10 @@ void handle(){
     response[i] = bluetooth.read();
     i++;
   }
-  Serial.println(response);
+  /*
+   * sample JSON : { "led" : 1, "time" : 1000 }
+   * 1번 led를 1초 동안 켠다.
+   */
   String result(response);
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(result);
